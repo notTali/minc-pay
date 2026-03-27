@@ -1,7 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle, Mail, Phone } from "lucide-react";
+import { getSiteSettings } from "@/sanity/siteSettings";
 
-export default function Footer() {
+function toWaMe(e164: string) {
+  return `https://wa.me/${e164.replace(/[^\d]/g, "")}`;
+}
+
+export default async function Footer() {
+  const settings = await getSiteSettings();
+
   return (
     <footer style={{ backgroundColor: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -10,11 +18,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-sm flex items-center justify-center font-display font-black text-white text-sm"
-                style={{ backgroundColor: "var(--crimson-600)" }}>M</div>
-              <span className="font-display text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-                MINC <span style={{ color: "var(--crimson-500)" }}>Pay</span>
-              </span>
+              <Image
+                src="/minc-logo.png"
+                alt={settings.brandName ?? "MINC Pay"}
+                width={150}
+                height={40}
+                className="h-8 w-auto object-contain"
+              />
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
               Modern payment infrastructure for South African businesses. Accept every payment, everywhere.
@@ -59,24 +69,24 @@ export default function Footer() {
             <h4 className="text-sm tracking-widest uppercase mb-4 font-mono" style={{ color: "var(--text-primary)" }}>Get In Touch</h4>
             <ul className="space-y-3">
               <li>
-                <a href="https://wa.me/27000000000" target="_blank" rel="noopener noreferrer"
+                <a href={toWaMe(settings.whatsAppNumberE164)} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2.5 text-sm transition-colors hover-green"
                   style={{ color: "var(--text-muted)" }}>
                   <MessageCircle size={14} /> WhatsApp Support
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@mincpay.co.za"
+                <a href={`mailto:${settings.supportEmail}`}
                   className="flex items-center gap-2.5 text-sm transition-colors hover-text-secondary"
                   style={{ color: "var(--text-muted)" }}>
-                  <Mail size={14} /> hello@mincpay.co.za
+                  <Mail size={14} /> {settings.supportEmail}
                 </a>
               </li>
               <li>
-                <a href="tel:+27000000000"
+                <a href={`tel:${settings.supportPhoneE164}`}
                   className="flex items-center gap-2.5 text-sm transition-colors hover-text-secondary"
                   style={{ color: "var(--text-muted)" }}>
-                  <Phone size={14} /> +27 (0) 00 000 0000
+                  <Phone size={14} /> {settings.supportPhoneDisplay}
                 </a>
               </li>
             </ul>
@@ -86,11 +96,18 @@ export default function Footer() {
         <div className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: "1px solid var(--border-subtle)" }}>
           <p className="text-xs font-mono" style={{ color: "var(--text-faint)" }}>
-            © {new Date().getFullYear()} MINC Pay. All rights reserved.
+            © {new Date().getFullYear()} {settings.brandName}. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            {["Privacy Policy", "Terms of Service"].map((item) => (
-              <span key={item} className="text-xs" style={{ color: "var(--text-faint)" }}>{item}</span>
+            {(settings.legalLinks ?? []).map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-xs transition-colors hover-text-secondary"
+                style={{ color: "var(--text-faint)" }}
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
         </div>

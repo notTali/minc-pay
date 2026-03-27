@@ -22,6 +22,33 @@ export interface ContactMessage {
   submittedAt: string;
 }
 
+export type SiteLink = {
+  label: string;
+  url: string;
+};
+
+export type LegalLink = {
+  label: string;
+  href: string;
+};
+
+export interface SiteSettings {
+  brandName: string;
+  supportEmail: string;
+  supportPhoneDisplay: string;
+  supportPhoneE164: string;
+  whatsAppNumberE164: string;
+  supportHours?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  region?: string;
+  postalCode?: string;
+  country?: string;
+  socialLinks?: SiteLink[];
+  legalLinks?: LegalLink[];
+}
+
 export type PaymentMethod = {
   id: string;
   title: string;

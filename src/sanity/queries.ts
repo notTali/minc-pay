@@ -41,3 +41,22 @@ export const ALL_CONTACT_MESSAGES_QUERY = `
     submittedAt
   }
 `;
+
+export const SITE_SETTINGS_QUERY = `
+  *[_type == "siteSettings"][0] {
+    brandName,
+    supportEmail,
+    supportPhoneDisplay,
+    supportPhoneE164,
+    whatsAppNumberE164,
+    supportHours,
+    addressLine1,
+    addressLine2,
+    city,
+    region,
+    postalCode,
+    country,
+    socialLinks[]{ label, url },
+    legalLinks[]{ label, href }
+  }
+`;

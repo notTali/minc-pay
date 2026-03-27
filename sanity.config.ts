@@ -31,6 +31,10 @@ export default defineConfig({
                   .filter('_type == "application"')
                   .defaultOrdering([{ field: 'submittedAt', direction: 'desc' }])
               ),
+            S.divider(),
+            S.listItem()
+              .title('Site Settings')
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
             S.listItem()
               .title('Contact Messages')
               .child(

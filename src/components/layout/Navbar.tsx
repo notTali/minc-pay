@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -58,13 +59,14 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="w-8 h-8 rounded-sm flex items-center justify-center font-display font-black text-white text-sm" style={{ backgroundColor: "var(--crimson-600)" }}>M</div>
-              <div className="absolute -inset-0.5 rounded-sm blur-sm opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: "rgba(220,38,38,0.3)" }} />
-            </div>
-            <span className="font-display text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
-              MINC <span style={{ color: "var(--crimson-500)" }}>Pay</span>
-            </span>
+            <Image
+              src="/minc-logo.png"
+              alt="MINC Pay"
+              width={150}
+              height={40}
+              className="h-8 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

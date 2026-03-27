@@ -1,4 +1,5 @@
 import { applicationSchema }    from "./application";
 import { contactMessageSchema } from "./contactMessage";
+import { siteSettingsSchema }   from "./siteSettings";
 
-export const schemaTypes = [applicationSchema, contactMessageSchema];
+export const schemaTypes = [siteSettingsSchema, applicationSchema, contactMessageSchema];

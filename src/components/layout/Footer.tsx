@@ -48,10 +48,11 @@ export default async function Footer() {
             <h4 className="text-sm tracking-widest uppercase mb-4 font-mono" style={{ color: "var(--text-primary)" }}>Company</h4>
             <ul className="space-y-2.5">
               {[
-                { label: "How It Works", href: "/#how-it-works" },
-                { label: "Apply Now",    href: "/apply" },
-                { label: "Contact Us",   href: "/contact" },
-                { label: "Admin Portal", href: "/admin" },
+                { label: "How It Works",    href: "/#how-it-works" },
+                { label: "Devices We Offer", href: "/devices" },
+                { label: "Apply Now",        href: "/apply" },
+                { label: "Contact Us",       href: "/contact" },
+                { label: "Admin Portal",     href: "/admin" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link href={item.href}
@@ -96,7 +97,7 @@ export default async function Footer() {
         <div className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: "1px solid var(--border-subtle)" }}>
           <p className="text-xs font-mono" style={{ color: "var(--text-faint)" }}>
-            © {new Date().getFullYear()} {settings.brandName}. All rights reserved.
+            © {new Date().getFullYear()} Designed and Developed by SKUN (PTY) LTD. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {(settings.legalLinks ?? []).map((item) => (
